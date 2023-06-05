@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <Forms>
+    <UDF1 Class="TCEForm" Encoding="Ascii85">D]j9^2nldAU:MM2b.}cxWeIh0Gi32eO*Ft$Wn{Y6%{mcIVXk6g4#[WIN?5MqOex7:p25WKoLEqjnV-i7R=h02pOat2qN1Y0z}z;oSE2^zv$H4XglA-yq.mN/]-G)y6?%2X8_i[d0Rsa7</UDF1>
+  </Forms>
+  <CheatEntries>
+    <CheatEntry>
+      <ID>276</ID>
+      <Description>"Enable"</Description>
+      <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <Color>00FF00</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+openProcess("OBF-Win64-Shipping.exe")
+if process == "OBF-Win64-Shipping.exe" then
+  --ShowMessage("Success")
+elseif process ~= nil then
+  ShowMessage("Wrong prozess!")
+  createTimer(10, function() memrec.active=false end)
+else
+  ShowMessage("Open game first!")
+  createTimer(10, function() memrec.active=false end)
+end
+
+{$asm}
+[DISABLE]
+{$lua}
+--if syntaxcheck then return end -- don't run past this point when adding to table/editing
+{$asm}
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>324</ID>
+          <Description>"Charakter"</Description>
+          <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+          <Color>FF8000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>292</ID>
+              <Description>"Lust -&gt; 9999"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Breeders of the Nephelym  
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,89 8A A8 36 00 00) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov ecx,(int)9999
+
+code:
+  mov [rdx+000036A8],ecx
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 89 8A A8 36 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+DD3D8C
+
+OBF-Win64-Shipping.exe+DD3D69: 8B 88 AC 36 00 00     - mov ecx,[rax+000036AC]
+OBF-Win64-Shipping.exe+DD3D6F: EB 1B                 - jmp OBF-Win64-Shipping.exe+DD3D8C
+OBF-Win64-Shipping.exe+DD3D71: F3 0F 2C C6           - cvttss2si eax,xmm6
+OBF-Win64-Shipping.exe+DD3D75: 03 82 A8 36 00 00     - add eax,[rdx+000036A8]
+OBF-Win64-Shipping.exe+DD3D7B: 79 04                 - jns OBF-Win64-Shipping.exe+DD3D81
+OBF-Win64-Shipping.exe+DD3D7D: 33 C9                 - xor ecx,ecx
+OBF-Win64-Shipping.exe+DD3D7F: EB 0B                 - jmp OBF-Win64-Shipping.exe+DD3D8C
+OBF-Win64-Shipping.exe+DD3D81: 8B 8A AC 36 00 00     - mov ecx,[rdx+000036AC]
+OBF-Win64-Shipping.exe+DD3D87: 3B C1                 - cmp eax,ecx
+OBF-Win64-Shipping.exe+DD3D89: 0F 4C C8              - cmovl ecx,eax
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+DD3D8C: 89 8A A8 36 00 00     - mov [rdx+000036A8],ecx
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+DD3D92: 48 8B 0D C7 55 67 03  - mov rcx,[OBF-Win64-Shipping.exe+4449360]
+OBF-Win64-Shipping.exe+DD3D99: 0F 28 74 24 20        - movaps xmm6,[rsp+20]
+OBF-Win64-Shipping.exe+DD3D9E: 48 83 C4 38           - add rsp,38
+OBF-Win64-Shipping.exe+DD3DA2: E9 29 E7 19 00        - jmp OBF-Win64-Shipping.exe+F724D0
+OBF-Win64-Shipping.exe+DD3DA7: CC                    - int 3 
+OBF-Win64-Shipping.exe+DD3DA8: CC                    - int 3 
+OBF-Win64-Shipping.exe+DD3DA9: CC                    - int 3 
+OBF-Win64-Shipping.exe+DD3DAA: CC                    - int 3 
+OBF-Win64-Shipping.exe+DD3DAB: CC                    - int 3 
+OBF-Win64-Shipping.exe+DD3DAC: CC                    - int 3 
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>300</ID>
+              <Description>"Spirit -&gt; 99"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,66 0F 6E 80 18 03 00 00 0F 5B C0 E8 8A) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rax+00000318],(int)99
+code:
+  movd xmm0,[rax+00000318]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 3
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 66 0F 6E 80 18 03 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+F73476
+
+OBF-Win64-Shipping.exe+F73442: 48 83 EC 50              - sub rsp,50
+OBF-Win64-Shipping.exe+F73446: 48 83 B9 A8 03 00 00 00  - cmp qword ptr [rcx+000003A8],00
+OBF-Win64-Shipping.exe+F7344E: 48 8B D9                 - mov rbx,rcx
+OBF-Win64-Shipping.exe+F73451: 74 66                    - je OBF-Win64-Shipping.exe+F734B9
+OBF-Win64-Shipping.exe+F73453: F3 0F 10 0D C5 76 35 02  - movss xmm1,[OBF-Win64-Shipping.exe+32CAB20]
+OBF-Win64-Shipping.exe+F7345B: 0F 57 DB                 - xorps xmm3,xmm3
+OBF-Win64-Shipping.exe+F7345E: 48 8B 05 B3 59 4D 03     - mov rax,[OBF-Win64-Shipping.exe+4448E18]
+OBF-Win64-Shipping.exe+F73465: F3 0F 10 15 C7 76 35 02  - movss xmm2,[OBF-Win64-Shipping.exe+32CAB34]
+OBF-Win64-Shipping.exe+F7346D: F3 0F 11 4C 24 20        - movss [rsp+20],xmm1
+OBF-Win64-Shipping.exe+F73473: 0F 57 C9                 - xorps xmm1,xmm1
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+F73476: 66 0F 6E 80 18 03 00 00  - movd xmm0,[rax+00000318]
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+F7347E: 0F 5B C0                 - cvtdq2ps xmm0,xmm0
+OBF-Win64-Shipping.exe+F73481: E8 8A 73 6A 01           - call OBF-Win64-Shipping.exe+261A810
+OBF-Win64-Shipping.exe+F73486: 48 8B 8B A8 03 00 00     - mov rcx,[rbx+000003A8]
+OBF-Win64-Shipping.exe+F7348D: 48 8D 54 24 30           - lea rdx,[rsp+30]
+OBF-Win64-Shipping.exe+F73492: 33 C0                    - xor eax,eax
+OBF-Win64-Shipping.exe+F73494: F3 0F 11 44 24 30        - movss [rsp+30],xmm0
+OBF-Win64-Shipping.exe+F7349A: C6 44 24 34 01           - mov byte ptr [rsp+34],01
+OBF-Win64-Shipping.exe+F7349F: C6 44 24 38 01           - mov byte ptr [rsp+38],01
+OBF-Win64-Shipping.exe+F734A4: 48 8B 89 88 03 00 00     - mov rcx,[rcx+00000388]
+OBF-Win64-Shipping.exe+F734AB: 48 89 44 24 40           - mov [rsp+40],rax
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>337</ID>
+                  <Description>"Taking spirit form is always possible"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,83 B8 18 03 00 00 0A) // should be unique
+alloc(newmem,$1000,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [rax+00000318],(int)99
+code:
+  cmp dword ptr [rax+00000318],0A
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 2
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 83 B8 18 03 00 00 0A
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+E02F0A
+
+OBF-Win64-Shipping.exe+E02ED5: 48 8D 4C 24 40        - lea rcx,[rsp+40]
+OBF-Win64-Shipping.exe+E02EDA: E8 A1 62 3F 01        - call OBF-Win64-Shipping.exe+21F9180
+OBF-Win64-Shipping.exe+E02EDF: 48 8B 0D 32 5F 64 03  - mov rcx,[OBF-Win64-Shipping.exe+4448E18]
+OBF-Win64-Shipping.exe+E02EE6: 48 8B 10              - mov rdx,[rax]
+OBF-Win64-Shipping.exe+E02EE9: E8 32 16 0B 00        - call OBF-Win64-Shipping.exe+EB4520
+OBF-Win64-Shipping.exe+E02EEE: 84 C0                 - test al,al
+OBF-Win64-Shipping.exe+E02EF0: 0F 84 9F 03 00 00     - je OBF-Win64-Shipping.exe+E03295
+OBF-Win64-Shipping.exe+E02EF6: 48 8B 05 1B 5F 64 03  - mov rax,[OBF-Win64-Shipping.exe+4448E18]
+OBF-Win64-Shipping.exe+E02EFD: 80 B8 22 03 00 00 00  - cmp byte ptr [rax+00000322],00
+OBF-Win64-Shipping.exe+E02F04: 0F 85 E4 02 00 00     - jne OBF-Win64-Shipping.exe+E031EE
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+E02F0A: 83 B8 18 03 00 00 0A  - cmp dword ptr [rax+00000318],0A
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+E02F11: 7D 35                 - jnl OBF-Win64-Shipping.exe+E02F48
+OBF-Win64-Shipping.exe+E02F13: 4C 8D 0D 36 DE 62 02  - lea r9,[OBF-Win64-Shipping.exe+3430D50]
+OBF-Win64-Shipping.exe+E02F1A: 4C 8D 05 57 DE 62 02  - lea r8,[OBF-Win64-Shipping.exe+3430D78]
+OBF-Win64-Shipping.exe+E02F21: 48 8D 15 80 DE 62 02  - lea rdx,[OBF-Win64-Shipping.exe+3430DA8]
+OBF-Win64-Shipping.exe+E02F28: 48 8D 4D A8           - lea rcx,[rbp-58]
+OBF-Win64-Shipping.exe+E02F2C: E8 EF D6 21 00        - call OBF-Win64-Shipping.exe+1020620
+OBF-Win64-Shipping.exe+E02F31: 48 8B 0D 28 64 64 03  - mov rcx,[OBF-Win64-Shipping.exe+4449360]
+OBF-Win64-Shipping.exe+E02F38: 48 8B D0              - mov rdx,rax
+OBF-Win64-Shipping.exe+E02F3B: 41 B0 01              - mov r8b,01
+OBF-Win64-Shipping.exe+E02F3E: E8 FD 96 14 00        - call OBF-Win64-Shipping.exe+F4C640
+}
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>296</ID>
+              <Description>"Milk (All)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,8B 56 08 48 8D 4D A8) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rsi+08],(int)4000
+
+code:
+  mov edx,[rsi+08]
+  lea rcx,[rbp-58]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 2
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 8B 56 08 48 8D 4D A8
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+ED0842
+
+OBF-Win64-Shipping.exe+ED0820: 49 8B CF                 - mov rcx,r15
+OBF-Win64-Shipping.exe+ED0823: FF 50 08                 - call qword ptr [rax+08]
+OBF-Win64-Shipping.exe+ED0826: 48 8B 4D F0              - mov rcx,[rbp-10]
+OBF-Win64-Shipping.exe+ED082A: 48 85 C9                 - test rcx,rcx
+OBF-Win64-Shipping.exe+ED082D: 74 05                    - je OBF-Win64-Shipping.exe+ED0834
+OBF-Win64-Shipping.exe+ED082F: E8 8C 0C 15 00           - call OBF-Win64-Shipping.exe+10214C0
+OBF-Win64-Shipping.exe+ED0834: 48 8B 4D 88              - mov rcx,[rbp-78]
+OBF-Win64-Shipping.exe+ED0838: 48 85 C9                 - test rcx,rcx
+OBF-Win64-Shipping.exe+ED083B: 74 05                    - je OBF-Win64-Shipping.exe+ED0842
+OBF-Win64-Shipping.exe+ED083D: E8 7E 0C 15 00           - call OBF-Win64-Shipping.exe+10214C0
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+ED0842: 8B 56 08                 - mov edx,[rsi+08]
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+ED0845: 48 8D 4D A8              - lea rcx,[rbp-58]
+OBF-Win64-Shipping.exe+ED0849: 48 89 7D A8              - mov [rbp-58],rdi
+OBF-Win64-Shipping.exe+ED084D: 48 C7 45 B0 00 00 00 00  - mov qword ptr [rbp-50],00000000
+OBF-Win64-Shipping.exe+ED0855: E8 86 D8 0E 00           - call OBF-Win64-Shipping.exe+FBE0E0
+OBF-Win64-Shipping.exe+ED085A: 8B 55 B0                 - mov edx,[rbp-50]
+OBF-Win64-Shipping.exe+ED085D: 8B C2                    - mov eax,edx
+OBF-Win64-Shipping.exe+ED085F: F7 D8                    - neg eax
+OBF-Win64-Shipping.exe+ED0861: 89 55 A0                 - mov [rbp-60],edx
+OBF-Win64-Shipping.exe+ED0864: 48 8B 45 A8              - mov rax,[rbp-58]
+OBF-Win64-Shipping.exe+ED0868: 1B C9                    - sbb ecx,ecx
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>327</ID>
+              <Description>"Sperm (All)"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,8B 56 0C 48 8D 4C 24 68) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rsi+0C],(int)2000
+
+code:
+  mov edx,[rsi+0C]
+  lea rcx,[rsp+68]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 3
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 8B 56 0C 48 8D 4C 24 68
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+ED062B
+
+OBF-Win64-Shipping.exe+ED05ED: E8 6E C2 53 00              - call OBF-Win64-Shipping.exe+140C860
+OBF-Win64-Shipping.exe+ED05F2: 48 8B 93 08 0A 00 00        - mov rdx,[rbx+00000A08]
+OBF-Win64-Shipping.exe+ED05F9: 48 8D 8B A0 08 00 00        - lea rcx,[rbx+000008A0]
+OBF-Win64-Shipping.exe+ED0600: E8 5B C2 53 00              - call OBF-Win64-Shipping.exe+140C860
+OBF-Win64-Shipping.exe+ED0605: 48 8B 93 08 0A 00 00        - mov rdx,[rbx+00000A08]
+OBF-Win64-Shipping.exe+ED060C: 48 8D 8B 18 08 00 00        - lea rcx,[rbx+00000818]
+OBF-Win64-Shipping.exe+ED0613: E8 48 C2 53 00              - call OBF-Win64-Shipping.exe+140C860
+OBF-Win64-Shipping.exe+ED0618: 48 8B 8B F0 03 00 00        - mov rcx,[rbx+000003F0]
+OBF-Win64-Shipping.exe+ED061F: 48 8D 93 88 07 00 00        - lea rdx,[rbx+00000788]
+OBF-Win64-Shipping.exe+ED0626: E8 75 A6 61 00              - call OBF-Win64-Shipping.exe+14EACA0
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+ED062B: 8B 56 0C                    - mov edx,[rsi+0C]
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+ED062E: 48 8D 4C 24 68              - lea rcx,[rsp+68]
+OBF-Win64-Shipping.exe+ED0633: 48 89 7C 24 68              - mov [rsp+68],rdi
+OBF-Win64-Shipping.exe+ED0638: 48 C7 44 24 70 00 00 00 00  - mov qword ptr [rsp+70],00000000
+OBF-Win64-Shipping.exe+ED0641: E8 9A DA 0E 00              - call OBF-Win64-Shipping.exe+FBE0E0
+OBF-Win64-Shipping.exe+ED0646: 8B 54 24 70                 - mov edx,[rsp+70]
+OBF-Win64-Shipping.exe+ED064A: 8B C2                       - mov eax,edx
+OBF-Win64-Shipping.exe+ED064C: F7 D8                       - neg eax
+OBF-Win64-Shipping.exe+ED064E: 89 54 24 60                 - mov [rsp+60],edx
+OBF-Win64-Shipping.exe+ED0652: 48 8B 44 24 68              - mov rax,[rsp+68]
+OBF-Win64-Shipping.exe+ED0657: 1B C9                       - sbb ecx,ecx
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>79</ID>
+          <Description>"Values"</Description>
+          <Options moDeactivateChildrenAsWell="1"/>
+          <Color>FF8000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(Values,OBF-Win64-Shipping.exe,8B 11 48 8D 4C 24 20 48 89 44) // should be unique
+alloc(newmem,$255,Values)
+alloc(pValues,4)
+
+label(code)
+label(return)
+label(rValues)
+
+newmem:
+  mov [pValues],rcx
+
+code:
+  mov edx,[rcx]
+  lea rcx,[rsp+20]
+  jmp return
+
+rValues:
+  readmem(Values,7)
+
+Values:
+  jmp newmem
+  db 90 90
+
+return:
+registersymbol(Values)
+registersymbol(rValues)
+registersymbol(pValues)
+
+[DISABLE]
+Values:
+readmem(rValues,7)
+unregistersymbol(rValues)
+unregistersymbol(pValues)
+dealloc(pValues)
+unregistersymbol(Values)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+F57C02
+
+OBF-Win64-Shipping.exe+F57BCF: 48 8D 4C 24 20        - lea rcx,[rsp+20]
+OBF-Win64-Shipping.exe+F57BD4: E8 D7 64 82 FF        - call OBF-Win64-Shipping.exe+77E0B0
+OBF-Win64-Shipping.exe+F57BD9: 48 8B 4C 24 20        - mov rcx,[rsp+20]
+OBF-Win64-Shipping.exe+F57BDE: 48 8D 15 57 89 41 02  - lea rdx,[OBF-Win64-Shipping.exe+337053C]
+OBF-Win64-Shipping.exe+F57BE5: 41 B8 04 00 00 00     - mov r8d,00000004
+OBF-Win64-Shipping.exe+F57BEB: E8 70 FA 08 00        - call OBF-Win64-Shipping.exe+FE7660
+OBF-Win64-Shipping.exe+F57BF0: EB 26                 - jmp OBF-Win64-Shipping.exe+F57C18
+OBF-Win64-Shipping.exe+F57BF2: 48 8B 80 30 02 00 00  - mov rax,[rax+00000230]
+OBF-Win64-Shipping.exe+F57BF9: 48 8B 88 40 02 00 00  - mov rcx,[rax+00000240]
+OBF-Win64-Shipping.exe+F57C00: 33 C0                 - xor eax,eax
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+F57C02: 8B 11                 - mov edx,[rcx]
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+F57C04: 48 8D 4C 24 20        - lea rcx,[rsp+20]
+OBF-Win64-Shipping.exe+F57C09: 48 89 44 24 20        - mov [rsp+20],rax
+OBF-Win64-Shipping.exe+F57C0E: 48 89 44 24 28        - mov [rsp+28],rax
+OBF-Win64-Shipping.exe+F57C13: E8 C8 64 06 00        - call OBF-Win64-Shipping.exe+FBE0E0
+OBF-Win64-Shipping.exe+F57C18: 48 8D 54 24 20        - lea rdx,[rsp+20]
+OBF-Win64-Shipping.exe+F57C1D: 48 8B CB              - mov rcx,rbx
+OBF-Win64-Shipping.exe+F57C20: E8 0B 9D 0C 00        - call OBF-Win64-Shipping.exe+1021930
+OBF-Win64-Shipping.exe+F57C25: 48 8B 4C 24 20        - mov rcx,[rsp+20]
+OBF-Win64-Shipping.exe+F57C2A: 48 85 C9              - test rcx,rcx
+OBF-Win64-Shipping.exe+F57C2D: 74 05                 - je OBF-Win64-Shipping.exe+F57C34
+}
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Activate</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>97</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Deactivate</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>110</Key>
+              </Keys>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>305</ID>
+              <Description>"Keys"</Description>
+              <Options moAlwaysHideChildren="1"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pValues</Address>
+              <Offsets>
+                <Offset>8</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>308</ID>
+                  <Description>"Set -&gt; 99 (Variant 2)"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,83 78 08 01 7D D0) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [rax+08],(int)99
+code:
+  cmp dword ptr [rax+08],01
+  jnl OBF-Win64-Shipping.exe+DFC2BE
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 83 78 08 01 7D D0
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+DFC2E8
+
+OBF-Win64-Shipping.exe+DFC2BC: 75 F2                 - jne OBF-Win64-Shipping.exe+DFC2B0
+OBF-Win64-Shipping.exe+DFC2BE: 80 BF 69 02 00 00 00  - cmp byte ptr [rdi+00000269],00
+OBF-Win64-Shipping.exe+DFC2C5: B2 01                 - mov dl,01
+OBF-Win64-Shipping.exe+DFC2C7: 48 8B CF              - mov rcx,rdi
+OBF-Win64-Shipping.exe+DFC2CA: 74 63                 - je OBF-Win64-Shipping.exe+DFC32F
+OBF-Win64-Shipping.exe+DFC2CC: E8 0F 92 1B 00        - call OBF-Win64-Shipping.exe+FB54E0
+OBF-Win64-Shipping.exe+DFC2D1: EB 61                 - jmp OBF-Win64-Shipping.exe+DFC334
+OBF-Win64-Shipping.exe+DFC2D3: 48 8B 05 36 CB 64 03  - mov rax,[OBF-Win64-Shipping.exe+4448E10]
+OBF-Win64-Shipping.exe+DFC2DA: 48 8B 88 30 02 00 00  - mov rcx,[rax+00000230]
+OBF-Win64-Shipping.exe+DFC2E1: 48 8B 81 40 02 00 00  - mov rax,[rcx+00000240]
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+DFC2E8: 83 78 08 01           - cmp dword ptr [rax+08],01
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+DFC2EC: 7D D0                 - jnl OBF-Win64-Shipping.exe+DFC2BE
+OBF-Win64-Shipping.exe+DFC2EE: 4C 8D 0D E3 09 63 02  - lea r9,[OBF-Win64-Shipping.exe+342CCD8]
+OBF-Win64-Shipping.exe+DFC2F5: 4C 8D 05 F4 09 63 02  - lea r8,[OBF-Win64-Shipping.exe+342CCF0]
+OBF-Win64-Shipping.exe+DFC2FC: 48 8D 15 1D 0A 63 02  - lea rdx,[OBF-Win64-Shipping.exe+342CD20]
+OBF-Win64-Shipping.exe+DFC303: 48 8D 4D D8           - lea rcx,[rbp-28]
+OBF-Win64-Shipping.exe+DFC307: E8 14 43 22 00        - call OBF-Win64-Shipping.exe+1020620
+OBF-Win64-Shipping.exe+DFC30C: 48 8B 0D 4D D0 64 03  - mov rcx,[OBF-Win64-Shipping.exe+4449360]
+OBF-Win64-Shipping.exe+DFC313: 48 8B D0              - mov rdx,rax
+OBF-Win64-Shipping.exe+DFC316: 41 B0 01              - mov r8b,01
+OBF-Win64-Shipping.exe+DFC319: E8 22 03 15 00        - call OBF-Win64-Shipping.exe+F4C640
+}
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>307</ID>
+              <Description>"Favor"</Description>
+              <Options moAlwaysHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pValues</Address>
+              <Offsets>
+                <Offset>4</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>303</ID>
+                  <Description>"Set -&gt; 9999 (Variant 2)"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,83 79 04 00 7D 07) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [rcx+04],(int)9999
+
+code:
+  cmp dword ptr [rcx+04],00
+  jnl OBF-Win64-Shipping.exe+E7475D
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 83 79 04 00 7D 07
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+E74750
+
+OBF-Win64-Shipping.exe+E74721: 48 8B 0D 38 4C 5D 03  - mov rcx,[OBF-Win64-Shipping.exe+4449360]
+OBF-Win64-Shipping.exe+E74728: E9 13 ED 0F 00        - jmp OBF-Win64-Shipping.exe+F73440
+OBF-Win64-Shipping.exe+E7472D: CC                    - int 3 
+OBF-Win64-Shipping.exe+E7472E: CC                    - int 3 
+OBF-Win64-Shipping.exe+E7472F: CC                    - int 3 
+OBF-Win64-Shipping.exe+E74730: 48 8B 81 30 02 00 00  - mov rax,[rcx+00000230]
+OBF-Win64-Shipping.exe+E74737: 4C 8B 80 40 02 00 00  - mov r8,[rax+00000240]
+OBF-Win64-Shipping.exe+E7473E: 41 01 50 04           - add [r8+04],edx
+OBF-Win64-Shipping.exe+E74742: 48 8B 81 30 02 00 00  - mov rax,[rcx+00000230]
+OBF-Win64-Shipping.exe+E74749: 48 8B 88 40 02 00 00  - mov rcx,[rax+00000240]
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+E74750: 83 79 04 00           - cmp dword ptr [rcx+04],00
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+E74754: 7D 07                 - jnl OBF-Win64-Shipping.exe+E7475D
+OBF-Win64-Shipping.exe+E74756: C7 41 04 00 00 00 00  - mov [rcx+04],00000000
+OBF-Win64-Shipping.exe+E7475D: C3                    - ret 
+OBF-Win64-Shipping.exe+E7475E: CC                    - int 3 
+OBF-Win64-Shipping.exe+E7475F: CC                    - int 3 
+OBF-Win64-Shipping.exe+E74760: 48 8B 81 30 02 00 00  - mov rax,[rcx+00000230]
+OBF-Win64-Shipping.exe+E74767: 4C 8B 80 40 02 00 00  - mov r8,[rax+00000240]
+OBF-Win64-Shipping.exe+E7476E: 41 01 50 08           - add [r8+08],edx
+OBF-Win64-Shipping.exe+E74772: 48 8B 81 30 02 00 00  - mov rax,[rcx+00000230]
+OBF-Win64-Shipping.exe+E74779: 48 8B 88 40 02 00 00  - mov rcx,[rax+00000240]
+}
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>78</ID>
+              <Description>"Orgasium"</Description>
+              <Options moAlwaysHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <ShowAsSigned>0</ShowAsSigned>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pValues</Address>
+              <Offsets>
+                <Offset>0</Offset>
+              </Offsets>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>223</ID>
+                  <Description>"Set -&gt; 999999 (Variant 2)"</Description>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,83 39 00 7D 06) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [rcx],(int)999999
+
+code:
+  cmp dword ptr [rcx],00
+  jnl OBF-Win64-Shipping.exe+E747BA
+  jmp return
+
+INJECT:
+  jmp newmem
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 83 39 00 7D 06
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+E747AF
+
+OBF-Win64-Shipping.exe+E74784: 7D 07                 - jnl OBF-Win64-Shipping.exe+E7478D
+OBF-Win64-Shipping.exe+E74786: C7 41 08 00 00 00 00  - mov [rcx+08],00000000
+OBF-Win64-Shipping.exe+E7478D: C3                    - ret
+OBF-Win64-Shipping.exe+E7478E: CC                    - int 3
+OBF-Win64-Shipping.exe+E7478F: CC                    - int 3
+OBF-Win64-Shipping.exe+E74790: 48 8B 81 30 02 00 00  - mov rax,[rcx+00000230]
+OBF-Win64-Shipping.exe+E74797: 4C 8B 80 40 02 00 00  - mov r8,[rax+00000240]
+OBF-Win64-Shipping.exe+E7479E: 41 01 10              - add [r8],edx
+OBF-Win64-Shipping.exe+E747A1: 48 8B 81 30 02 00 00  - mov rax,[rcx+00000230]
+OBF-Win64-Shipping.exe+E747A8: 48 8B 88 40 02 00 00  - mov rcx,[rax+00000240]
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+E747AF: 83 39 00              - cmp dword ptr [rcx],00
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+E747B2: 7D 06                 - jnl OBF-Win64-Shipping.exe+E747BA
+OBF-Win64-Shipping.exe+E747B4: C7 01 00 00 00 00     - mov [rcx],00000000
+OBF-Win64-Shipping.exe+E747BA: C3                    - ret
+OBF-Win64-Shipping.exe+E747BB: CC                    - int 3
+OBF-Win64-Shipping.exe+E747BC: CC                    - int 3
+OBF-Win64-Shipping.exe+E747BD: CC                    - int 3
+OBF-Win64-Shipping.exe+E747BE: CC                    - int 3
+OBF-Win64-Shipping.exe+E747BF: CC                    - int 3
+OBF-Win64-Shipping.exe+E747C0: 48 89 5C 24 20        - mov [rsp+20],rbx
+OBF-Win64-Shipping.exe+E747C5: 55                    - push rbp
+}
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>294</ID>
+              <Description>"Orgasium (Amber/Camilla) -&gt; 999999"</Description>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(INJECT,OBF-Win64-Shipping.exe,29 11 8B 95 E0 01 00 00 48 8B 0D * * * * E8 8B) // should be unique
+alloc(newmem,$255,INJECT)
+
+label(code)
+label(return)
+
+newmem:
+  mov edx,0
+  mov [rcx],(int)999999
+
+code:
+  sub [rcx],edx
+  mov edx,[rbp+000001E0]
+  jmp return
+
+INJECT:
+  jmp newmem
+  nop 3
+return:
+registersymbol(INJECT)
+
+[DISABLE]
+INJECT:
+  db 29 11 8B 95 E0 01 00 00
+
+unregistersymbol(INJECT)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+E613F1
+
+OBF-Win64-Shipping.exe+E613B7: 4C 8D 8D E0 01 00 00  - lea r9,[rbp+000001E0]
+OBF-Win64-Shipping.exe+E613BE: 48 8B 0D 4B 7A 5E 03  - mov rcx,[OBF-Win64-Shipping.exe+4448E10]
+OBF-Win64-Shipping.exe+E613C5: 4C 8B 00              - mov r8,[rax]
+OBF-Win64-Shipping.exe+E613C8: 48 8B 12              - mov rdx,[rdx]
+OBF-Win64-Shipping.exe+E613CB: E8 20 3B 05 00        - call OBF-Win64-Shipping.exe+EB4EF0
+OBF-Win64-Shipping.exe+E613D0: 8B 95 E0 01 00 00     - mov edx,[rbp+000001E0]
+OBF-Win64-Shipping.exe+E613D6: 0F AF 96 9C 02 00 00  - imul edx,[rsi+0000029C]
+OBF-Win64-Shipping.exe+E613DD: 48 8B 86 78 02 00 00  - mov rax,[rsi+00000278]
+OBF-Win64-Shipping.exe+E613E4: 89 95 E0 01 00 00     - mov [rbp+000001E0],edx
+OBF-Win64-Shipping.exe+E613EA: 48 8B 88 40 02 00 00  - mov rcx,[rax+00000240]
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+E613F1: 29 11                 - sub [rcx],edx
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+E613F3: 8B 95 E0 01 00 00     - mov edx,[rbp+000001E0]
+OBF-Win64-Shipping.exe+E613F9: 48 8B 0D 10 7A 5E 03  - mov rcx,[OBF-Win64-Shipping.exe+4448E10]
+OBF-Win64-Shipping.exe+E61400: E8 8B 33 01 00        - call OBF-Win64-Shipping.exe+E74790
+OBF-Win64-Shipping.exe+E61405: 48 8D 54 24 70        - lea rdx,[rsp+70]
+OBF-Win64-Shipping.exe+E6140A: 48 89 7C 24 50        - mov [rsp+50],rdi
+OBF-Win64-Shipping.exe+E6140F: 48 8D 4C 24 50        - lea rcx,[rsp+50]
+OBF-Win64-Shipping.exe+E61414: 48 89 7C 24 58        - mov [rsp+58],rdi
+OBF-Win64-Shipping.exe+E61419: 48 89 7C 24 60        - mov [rsp+60],rdi
+OBF-Win64-Shipping.exe+E6141E: 48 89 7C 24 68        - mov [rsp+68],rdi
+OBF-Win64-Shipping.exe+E61423: E8 18 DE 38 01        - call OBF-Win64-Shipping.exe+21EF240
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>326</ID>
+          <Description>"Attributes (you need to look at your stats! -&gt; push "I")"</Description>
+          <Options moHideChildren="1" moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+          <Color>0080FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript Async="1">{ Game   : Breeders of the Nephelym
+  Version: 0.756.9
+  Date   : 2023-05-20
+  Author : RedoHeal
+}
+
+[ENABLE]
+aobscanmodule(Attributes,OBF-Win64-Shipping.exe,41 8B 96 A8 36 00 00) // should be unique
+alloc(newmem,$255,Attributes)
+alloc(pAttributes,4)
+
+label(code)
+label(return)
+label(rAttributes)
+
+newmem:
+  mov [pAttributes],r14
+
+code:
+  mov edx,[r14+000036A8]
+  jmp return
+
+rAttributes:
+  readmem(Attributes,7)
+
+Attributes:
+  jmp newmem
+  db 90 90
+
+return:
+registersymbol(Attributes)
+registersymbol(rAttributes)
+registersymbol(pAttributes)
+
+[DISABLE]
+Attributes:
+readmem(rAttributes,7)
+unregistersymbol(rAttributes)
+unregistersymbol(pAttributes)
+dealloc(pAttributes)
+unregistersymbol(Attributes)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: OBF-Win64-Shipping.exe+EE0D53
+
+OBF-Win64-Shipping.exe+EE0D29: 4C 8B A4 24 20 3A 00 00  - mov r12,[rsp+00003A20]
+OBF-Win64-Shipping.exe+EE0D31: 4D 85 FF                 - test r15,r15
+OBF-Win64-Shipping.exe+EE0D34: 74 08                    - je OBF-Win64-Shipping.exe+EE0D3E
+OBF-Win64-Shipping.exe+EE0D36: 49 8B CF                 - mov rcx,r15
+OBF-Win64-Shipping.exe+EE0D39: E8 82 07 14 00           - call OBF-Win64-Shipping.exe+10214C0
+OBF-Win64-Shipping.exe+EE0D3E: 48 8B 4D 70              - mov rcx,[rbp+70]
+OBF-Win64-Shipping.exe+EE0D42: 48 85 C9                 - test rcx,rcx
+OBF-Win64-Shipping.exe+EE0D45: 74 05                    - je OBF-Win64-Shipping.exe+EE0D4C
+OBF-Win64-Shipping.exe+EE0D47: E8 74 07 14 00           - call OBF-Win64-Shipping.exe+10214C0
+OBF-Win64-Shipping.exe+EE0D4C: 45 8B 86 AC 36 00 00     - mov r8d,[r14+000036AC]
+// ---------- INJECTING HERE ----------
+OBF-Win64-Shipping.exe+EE0D53: 41 8B 96 A8 36 00 00     - mov edx,[r14+000036A8]
+// ---------- DONE INJECTING  ----------
+OBF-Win64-Shipping.exe+EE0D5A: 48 8B 8E A0 04 00 00     - mov rcx,[rsi+000004A0]
+OBF-Win64-Shipping.exe+EE0D61: E8 2A B3 FF FF           - call OBF-Win64-Shipping.exe+EDC090
+OBF-Win64-Shipping.exe+EE0D66: 48 8B 0D 6B 71 56 03     - mov rcx,[OBF-Win64-Shipping.exe+4447ED8]
+OBF-Win64-Shipping.exe+EE0D6D: 49 8B D6                 - mov rdx,r14
+OBF-Win64-Shipping.exe+EE0D70: E8 2B 23 F0 FF           - call OBF-Win64-Shipping.exe+DE30A0
+OBF-Win64-Shipping.exe+EE0D75: 41 8B 96 A4 36 00 00     - mov edx,[r14+000036A4]
+OBF-Win64-Shipping.exe+EE0D7C: 44 8B C0                 - mov r8d,eax
+OBF-Win64-Shipping.exe+EE0D7F: 48 8B 8E 90 04 00 00     - mov rcx,[rsi+00000490]
+OBF-Win64-Shipping.exe+EE0D86: E8 05 B3 FF FF           - call OBF-Win64-Shipping.exe+EDC090
+OBF-Win64-Shipping.exe+EE0D8B: 45 8B 86 9C 36 00 00     - mov r8d,[r14+0000369C]
+}
+</AssemblerScript>
+          <Hotkeys>
+            <Hotkey>
+              <Action>Activate</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>97</Key>
+              </Keys>
+              <ID>0</ID>
+            </Hotkey>
+            <Hotkey>
+              <Action>Deactivate</Action>
+              <Keys>
+                <Key>18</Key>
+                <Key>110</Key>
+              </Keys>
+              <ID>1</ID>
+            </Hotkey>
+          </Hotkeys>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>335</ID>
+              <Description>"To change a Nephelym open its stats :)"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>0080FF</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>328</ID>
+                  <Description>"CurrentLust"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36A8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>331</ID>
+                  <Description>"MaxLust"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36AC</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>333</ID>
+                  <Description>"CurrentXP"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>3698</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>334</ID>
+                  <Description>"MaxXP"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>369C</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>330</ID>
+                  <Description>"Level"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36A0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>314</ID>
+                  <Description>"Strength"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36BC</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>323</ID>
+                  <Description>"Dexterity"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36E0</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>322</ID>
+                  <Description>"Willpower"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36D4</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>321</ID>
+                  <Description>"Enticement"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36C8</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>320</ID>
+                  <Description>"Fertility"</Description>
+                  <Options moDeactivateChildrenAsWell="1"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pAttributes</Address>
+                  <Offsets>
+                    <Offset>36B0</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>679</ID>
+      <Description>"Start Game with Steam"</Description>
+      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <Color>80FF80</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+openProcess("OBF-Win64-Shipping.exe")
+if process == "OBF-Win64-Shipping.exe" then
+  --ShowMessage("Success")
+  ShellExecute('steam://rungameid/1161770')
+  --ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+elseif process ~= nil then
+  --ShowMessage("Wrong prozess!")
+  ShellExecute('steam://rungameid/1161770')
+  --ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+else
+  --ShowMessage("Open game first!")
+  ShellExecute('steam://rungameid/1161770')
+  --ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+end
+
+{$asm}
+[DISABLE]
+{$lua}
+--if syntaxcheck then return end -- don't run past this point when adding to table/editing
+{$asm}
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>678</ID>
+      <Description>"Start Game without Steam"</Description>
+      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <Color>80FF80</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+openProcess("OBF-Win64-Shipping.exe")
+if process == "OBF-Win64-Shipping.exe" then
+  --ShowMessage("Success")
+  --ShellExecute('steam://rungameid/1161770')
+  ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+elseif process ~= nil then
+  --ShowMessage("Wrong prozess!")
+  --ShellExecute('steam://rungameid/1161770')
+  ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+else
+  --ShowMessage("Open game first!")
+  --ShellExecute('steam://rungameid/1161770')
+  ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+end
+
+{$asm}
+[DISABLE]
+{$lua}
+--if syntaxcheck then return end -- don't run past this point when adding to table/editing
+{$asm}
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>339</ID>
+      <Description>"Show Cheats"</Description>
+      <Color>FF00FF</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+ShowMessage([[- Add Money:          Get 1,000,000 Orgasium (in-game currency).
+
+
+- Infinite lust:           Make every Nephelym have infinite lust. The Breeder only has infinite lust in spirit form.
+
+
+- Add Favor:             Gives you 1,000 Godess’ Favor.
+
+
+- Infinite spirit:         Rnable spirit form infinitely.
+
+
+- Max trait level:      Max a trait level.
+
+
+- All barns:               Unlock every barn in the game.
+
+
+- Max all fluids:        Fill all bodily fluids in your inventory.
+
+
+- Win surprise sex:    Automatically win every time you engage.
+
+
+- Win wild sex:          Your climax meter doesn’t rise during wild engagements.
+
+
+- Reset wild sex:        Turns off the “Win wild sex” cheat and allows your lust to decrease once again.
+
+
+- Always reproduce:  Sets the pregnancy chance to 100%, so you’ll conceive with every encounter.
+
+
+- Reset produce:        Sets your pregnancy chance back to normal and turns off the “Always reproduce” cheat.
+
+
+- All portals:               Unlock all portals with no lust required.
+
+
+- Imma lazy sack:       Unlocks all gates in the game.
+
+
+- Go home:                Teleport to your house.
+
+
+- Enable spirit form:  Will enable the spirit form.
+
+
+- All sex positions:     Unlock all sex positions.
+
+
+- World levels 0:       Allows you to set the world level. Change “0” for 1, 2, 3, 4, or 5 depending on the world level you’re after.
+
+
+- Remove cheats:      Remove cheats. This cheat doesn’t apply to money, enabled spirit form, barns, portals, and fluids.]])
+
+createTimer(10, function() memrec.active=false end)
+{$asm}
+[DISABLE]
+{$lua}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
