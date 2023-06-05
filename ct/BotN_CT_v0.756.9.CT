@@ -997,6 +997,104 @@ OBF-Win64-Shipping.exe+EE0D8B: 45 8B 86 9C 36 00 00     - mov r8d,[r14+0000369C]
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
+      <ID>679</ID>
+      <Description>"Start Game with Steam"</Description>
+      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <Color>80FF80</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+openProcess("OBF-Win64-Shipping.exe")
+if process == "OBF-Win64-Shipping.exe" then
+  --ShowMessage("Success")
+  ShellExecute('steam://rungameid/1161770')
+  --ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+elseif process ~= nil then
+  --ShowMessage("Wrong prozess!")
+  ShellExecute('steam://rungameid/1161770')
+  --ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+else
+  --ShowMessage("Open game first!")
+  ShellExecute('steam://rungameid/1161770')
+  --ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+end
+
+{$asm}
+[DISABLE]
+{$lua}
+--if syntaxcheck then return end -- don't run past this point when adding to table/editing
+{$asm}
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>678</ID>
+      <Description>"Start Game without Steam"</Description>
+      <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+      <Color>80FF80</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+openProcess("OBF-Win64-Shipping.exe")
+if process == "OBF-Win64-Shipping.exe" then
+  --ShowMessage("Success")
+  --ShellExecute('steam://rungameid/1161770')
+  ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+elseif process ~= nil then
+  --ShowMessage("Wrong prozess!")
+  --ShellExecute('steam://rungameid/1161770')
+  ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+else
+  --ShowMessage("Open game first!")
+  --ShellExecute('steam://rungameid/1161770')
+  ShellExecute('C:/Program Files (x86)/Steam/steamapps/common/Breeders of the Nephelym Alpha/OBF.exe')
+  sleep(3000)
+  local memrec_enable = assert(AddressList.getMemoryRecordByDescription'Enable', 'Memrec "Enable" does not exist')
+  if not memrec_enable.Active then
+     memrec_enable.Active = true
+  end
+  createTimer(10, function() memrec.active = false end)
+end
+
+{$asm}
+[DISABLE]
+{$lua}
+--if syntaxcheck then return end -- don't run past this point when adding to table/editing
+{$asm}
+
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
       <ID>339</ID>
       <Description>"Show Cheats"</Description>
       <Color>FF00FF</Color>
